@@ -16,6 +16,6 @@ Then open http://localhost:4321.
 
 - `index.html`, `skills.html`, `projects.html`: the 3 pages from the Figma file (Home, Skills, Projects)
 - `i18n.js`: Vietnamese, English and Chinese text, plus project data. Pick a language with the switcher or `?lang=vi|en|zh`
-- `main.js`: shared parts (top bar, dock, contact, footer, project dialog) and language switching
+- `main.js`: shared parts (top bar, dock, contact, project dialog) and language switching
 - `styles.css`: design tokens on `:root` and component styles
 - `assets/img/`: portrait and channel screenshots taken from the portfolio PDF

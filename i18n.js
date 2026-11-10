@@ -43,9 +43,9 @@ const I18N = {
     "contact.cta": "Liên hệ ngay",
     "contact.email": "Email:", "contact.phone": "Điện thoại", "contact.location": "Địa điểm",
     "contact.city": "Hà Nội, Việt Nam",
-    "footer.tag": "content ra doanh thu",
-    "footer.top": "Lên đầu trang",
     "lightbox.close": "Đóng",
+    "evidence.title": "Bằng chứng",
+    "evidence.source": "Nguồn: Portfolio.pdf, trang {page}",
   },
 
   en: {
@@ -88,9 +88,9 @@ const I18N = {
     "contact.cta": "Get in touch",
     "contact.email": "Email:", "contact.phone": "Phone", "contact.location": "Location",
     "contact.city": "Hanoi, Vietnam",
-    "footer.tag": "content that converts",
-    "footer.top": "Back to top",
     "lightbox.close": "Close",
+    "evidence.title": "Evidence",
+    "evidence.source": "Source: Portfolio.pdf, page {page}",
   },
 
   zh: {
@@ -133,18 +133,19 @@ const I18N = {
     "contact.cta": "联系我",
     "contact.email": "邮箱：", "contact.phone": "电话", "contact.location": "所在地",
     "contact.city": "越南河内",
-    "footer.tag": "能转化的内容",
-    "footer.top": "返回顶部",
     "lightbox.close": "关闭",
+    "evidence.title": "数据截图",
+    "evidence.source": "来源：Portfolio.pdf 第 {page} 页",
   },
 };
 
 // Project data shared by the Home and Projects grids and the detail dialog.
+// `evidence` screenshots come from Portfolio.pdf; `page` is the PDF page they appear on.
 const PROJECTS = [
   {
     id: "mido",
     cover: "edu-content",
-    images: [],
+    evidence: [],
     date: { vi: "02/2026 - Hiện tại", en: "02/2026 - Present", zh: "2026/02 - 至今" },
     vi: {
       title: "Mido-Media · Hệ thống kênh YouTube",
@@ -182,11 +183,22 @@ const PROJECTS = [
   },
   {
     id: "hq",
-    cover: "hq-views",
-    images: [
-      "hq-views", "hq-views-2", "hq-earnings", "hq-earnings-2", "hq-earnings-3",
-      "hq-earnings-4", "hq-earnings-5", "hq-sheet", "hq-miya",
-      "hq-pages", "hq-pages-2", "hq-pages-3", "hq-pages-4", "hq-pages-5",
+    cover: "hq-views-2025-07",
+    evidence: [
+      { img: "hq-views-2025-07", page: 13, cap: { vi: "31,1 triệu lượt xem Facebook, tháng 7/2025", en: "31.1M Facebook views, July 2025", zh: "2025年7月 Facebook 播放量 3110 万" } },
+      { img: "hq-earn-2025-08-a", page: 11, cap: { vi: "Thu nhập ước tính $4,3K (một page), tháng 8/2025", en: "Estimated earnings $4.3K (one page), August 2025", zh: "2025年8月单个专页预估收入 $4.3K" } },
+      { img: "hq-earn-2025-07", page: 13, cap: { vi: "Thu nhập ước tính $2,2K, tháng 7/2025", en: "Estimated earnings $2.2K, July 2025", zh: "2025年7月预估收入 $2.2K" } },
+      { img: "hq-earn-2025-08-b", page: 11, cap: { vi: "Thu nhập ước tính $1,8K, tháng 8/2025", en: "Estimated earnings $1.8K, August 2025", zh: "2025年8月预估收入 $1.8K" } },
+      { img: "hq-earn-2025-08-d", page: 12, cap: { vi: "Thu nhập ước tính $1,6K, tháng 8/2025", en: "Approximate earnings $1.6K, August 2025", zh: "2025年8月预估收入 $1.6K" } },
+      { img: "hq-earn-2025-08-c", page: 12, cap: { vi: "Thu nhập ước tính $1,4K, tháng 8/2025", en: "Approximate earnings $1.4K, August 2025", zh: "2025年8月预估收入 $1.4K" } },
+      { img: "hq-kpi-miya-b", page: 10, cap: { vi: "Bảng KPI page Miya: 84,3 triệu reach, 57,4 triệu lượt xem 3s", en: "Miya page KPI sheet: 84.3M reach, 57.4M 3-second views", zh: "Miya 专页 KPI 表：触达 8430 万，3 秒播放 5740 万" } },
+      { img: "hq-kpi-miya-a", page: 9, cap: { vi: "Bảng KPI theo ngày của page Miya", en: "Daily KPI sheet for the Miya page", zh: "Miya 专页每日 KPI 表" } },
+      { img: "hq-page-miya", page: 9, cap: { vi: "Page Miya: 328K người theo dõi", en: "Miya page: 328K followers", zh: "Miya 专页：32.8 万粉丝" } },
+      { img: "hq-page-chibokay", page: 8, cap: { vi: "Page Chibokay: 982K người theo dõi", en: "Chibokay page: 982K followers", zh: "Chibokay 专页：98.2 万粉丝" } },
+      { img: "hq-page-cellmovie", page: 8, cap: { vi: "Page Cell Movie Review: 821K người theo dõi", en: "Cell Movie Review page: 821K followers", zh: "Cell Movie Review 专页：82.1 万粉丝" } },
+      { img: "hq-page-skyfinz", page: 8, cap: { vi: "Page SKYFINz: 800K người theo dõi", en: "SKYFINz page: 800K followers", zh: "SKYFINz 专页：80 万粉丝" } },
+      { img: "hq-page-micahoya", page: 8, cap: { vi: "Page MicaHoya.TV: 645K người theo dõi", en: "MicaHoya.TV page: 645K followers", zh: "MicaHoya.TV 专页：64.5 万粉丝" } },
+      { img: "hq-page-gsbird", page: 8, cap: { vi: "Page GsBird: 571K người theo dõi", en: "GsBird page: 571K followers", zh: "GsBird 专页：57.1 万粉丝" } },
     ],
     date: { vi: "02/2024 - 02/2026", en: "02/2024 - 02/2026", zh: "2024/02 - 2026/02" },
     vi: {
@@ -198,7 +210,7 @@ const PROJECTS = [
         "Sản xuất và tối ưu video content có lượt xem cao, hoàn thành mục tiêu doanh thu.",
         "Vận hành Fanpage, phân tích dữ liệu và báo cáo hằng ngày, cải tiến nội dung bằng AI Tools.",
       ],
-      stats: [["$4-5K", "doanh thu/tháng"], ["Top 1", "doanh thu tháng toàn team"]],
+      stats: [["31,1M", "lượt xem Facebook, 07/2025"], ["$4-5K", "doanh thu/tháng"], ["Top 1", "doanh thu tháng toàn team"]],
     },
     en: {
       title: "HQ Group · Movie review Fanpages",
@@ -209,7 +221,7 @@ const PROJECTS = [
         "Produced and optimized high-view video content and hit revenue targets.",
         "Ran the Fanpages with daily data analysis and reports, improving content with AI tools.",
       ],
-      stats: [["$4-5K", "revenue/month"], ["#1", "monthly revenue in team"]],
+      stats: [["31.1M", "Facebook views, Jul 2025"], ["$4-5K", "revenue/month"], ["#1", "monthly revenue in team"]],
     },
     zh: {
       title: "HQ Group · 电影解说粉丝专页",
@@ -220,14 +232,18 @@ const PROJECTS = [
         "制作并优化高播放量视频内容，完成收入目标。",
         "运营粉丝专页，每日进行数据分析与汇报，并借助 AI 工具改进内容。",
       ],
-      stats: [["$4-5K", "月收入"], ["第一", "团队月收入排名"]],
+      stats: [["3110万", "Facebook 播放量（2025年7月）"], ["$4-5K", "月收入"], ["第一", "团队月收入排名"]],
     },
   },
   {
     id: "tygy",
     cover: "tygy-tiktok",
     phone: true,
-    images: ["tygy-tiktok", "tygy-fb", "tygy-yt"],
+    evidence: [
+      { img: "tygy-fb", page: 7, cap: { vi: "Facebook Tổng Kho Nhạc Cụ TYGY: 55K người theo dõi", en: "TYGY Facebook: 55K followers", zh: "TYGY Facebook：5.5 万粉丝" } },
+      { img: "tygy-tiktok", page: 7, cap: { vi: "TikTok Nhạc Cụ TYGY Music: 1.801 follower, 18,1K lượt thích", en: "TYGY TikTok: 1,801 followers, 18.1K likes", zh: "TYGY TikTok：1,801 粉丝，1.81 万点赞" } },
+      { img: "tygy-yt", page: 7, cap: { vi: "YouTube @nhaccutygy5999: 1,35K người đăng ký, 389 video", en: "YouTube @nhaccutygy5999: 1.35K subscribers, 389 videos", zh: "YouTube @nhaccutygy5999：1,350 订阅，389 个视频" } },
+    ],
     date: { vi: "08/2023 - 01/2024", en: "08/2023 - 01/2024", zh: "2023/08 - 2024/01" },
     vi: {
       title: "TYGY Music · TikTok Shop",
@@ -238,7 +254,7 @@ const PROJECTS = [
         "Sản xuất video ngắn thu hút leads, kết hợp giải trí và bán hàng trực tiếp.",
         "Tối ưu quy trình TikTok Shop và Shopee, tăng tỉ lệ chuyển đổi thực tế.",
       ],
-      stats: [["15", "đơn/ngày từ nội dung"]],
+      stats: [["15", "đơn/ngày từ nội dung"], ["55K", "người theo dõi Facebook"]],
     },
     en: {
       title: "TYGY Music · TikTok Shop",
@@ -249,7 +265,7 @@ const PROJECTS = [
         "Produced short videos that attract leads, mixing entertainment with direct selling.",
         "Optimized the TikTok Shop and Shopee flow to raise real conversion.",
       ],
-      stats: [["15", "orders/day from content"]],
+      stats: [["15", "orders/day from content"], ["55K", "Facebook followers"]],
     },
     zh: {
       title: "TYGY Music · TikTok 小店",
@@ -260,7 +276,7 @@ const PROJECTS = [
         "制作吸引潜在客户的短视频，将娱乐与直接销售相结合。",
         "优化 TikTok 小店与 Shopee 流程，提升实际转化率。",
       ],
-      stats: [["15", "单/天（来自内容）"]],
+      stats: [["15", "单/天（来自内容）"], ["5.5万", "Facebook 粉丝"]],
     },
   },
   {
@@ -268,7 +284,11 @@ const PROJECTS = [
     cover: "365-tiktok",
     phone: true,
     light: true,
-    images: ["365-tiktok", "365-fb", "365-yt"],
+    evidence: [
+      { img: "365-fb", page: 6, cap: { vi: "Facebook Thể thao 365: 17K người theo dõi", en: "Thể thao 365 Facebook: 17K followers", zh: "Thể thao 365 Facebook：1.7 万粉丝" } },
+      { img: "365-yt", page: 6, cap: { vi: "YouTube @thethao365thethao: 5,23K người đăng ký", en: "YouTube @thethao365thethao: 5.23K subscribers", zh: "YouTube @thethao365thethao：5,230 订阅" } },
+      { img: "365-tiktok", page: 6, cap: { vi: "TikTok Thể Thao 365 Store: 3.238 follower, 50K lượt thích", en: "Thể Thao 365 Store TikTok: 3,238 followers, 50K likes", zh: "Thể Thao 365 Store TikTok：3,238 粉丝，5 万点赞" } },
+    ],
     date: null,
     vi: {
       title: "Thể Thao 365 · Content & Sales",
@@ -279,7 +299,7 @@ const PROJECTS = [
         "Tối ưu nội dung theo hành vi người dùng.",
         "Hỗ trợ tăng traffic và chuyển đổi bán hàng.",
       ],
-      stats: [],
+      stats: [["17K", "người theo dõi Facebook"], ["5,23K", "subscriber YouTube"]],
     },
     en: {
       title: "Thể Thao 365 · Content & Sales",
@@ -290,7 +310,7 @@ const PROJECTS = [
         "Optimized content around user behavior.",
         "Helped grow traffic and sales conversion.",
       ],
-      stats: [],
+      stats: [["17K", "Facebook followers"], ["5.23K", "YouTube subscribers"]],
     },
     zh: {
       title: "Thể Thao 365 · 内容与销售",
@@ -301,7 +321,7 @@ const PROJECTS = [
         "根据用户行为优化内容。",
         "协助提升流量与销售转化。",
       ],
-      stats: [],
+      stats: [["1.7万", "Facebook 粉丝"], ["5,230", "YouTube 订阅"]],
     },
   },
 ];

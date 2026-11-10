@@ -1,4 +1,4 @@
-// Shared page parts (topbar, dock, contact, footer, dialog) live here so the 3 pages stay in sync.
+// Shared page parts (topbar, dock, contact, dialog) live here so the 3 pages stay in sync.
 const EMAIL = "duyanhkieu20092003@gmail.com";
 const PHONE = "0888 695 854";
 
@@ -10,7 +10,6 @@ const ICON = {
   file: `<svg viewBox="0 0 24 24" fill="none"><path d="M15 2.4V6c0 .66.54 1.2 1.2 1.2h3.6M8.4 7.2h2.4m-2.4 3.6h7.2m-7.2 3.6h7.2M18 4.2c-.53-.48-1.09-1.04-1.44-1.41a1.3 1.3 0 0 0-.89-.39H6.6a2.4 2.4 0 0 0-2.4 2.4v14.4a2.4 2.4 0 0 0 2.4 2.4h10.8a2.4 2.4 0 0 0 2.4-2.4V6.13c0-.3-.11-.6-.33-.82-.39-.42-1-1.05-1.47-1.11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   mail: `<svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="m3.5 6.5 8.5 6 8.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   external: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.25" stroke="currentColor" stroke-width="1.5"/><path d="M8.7 14.34 15 9m-5.8.19 5.6-.47.47 5.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  curve: `<svg viewBox="0 0 73 73" fill="none"><path d="M45.89 45.1 62.05 28.94 45.89 12.78m16.16 16.16h-47.1a4 4 0 0 0-4 4v27.29" stroke="#1D1D1D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 };
 
 const PARTIALS = {
@@ -46,10 +45,6 @@ const PARTIALS = {
       <div><dt data-i18n="contact.location"></dt><dd data-i18n="contact.city"></dd></div>
     </dl>`,
 
-  footer: () => `
-    <p class="footer__tag" data-i18n="footer.tag"></p>
-    <a class="footer__top" href="#top" data-i18n-aria="footer.top">${ICON.curve}</a>
-    <p class="footer__name">Duy Anhhhh</p>`,
 
   lightbox: () => `
     <form method="dialog"><button class="lightbox__close" data-i18n-aria="lightbox.close">×</button></form>
@@ -96,8 +91,15 @@ function openProject(id) {
       <ul class="job__list">${c.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>
       ${c.stats.length ? `<ul class="job__stats">${c.stats.map(([v, l]) => `<li><strong>${v}</strong><span>${l}</span></li>`).join("")}</ul>` : ""}
     </div>
-    ${p.images.length ? `<div class="lightbox__grid">${p.images.map((n) => `<img src="assets/img/${n}.jpg" alt="${c.title}">`).join("")}</div>` : ""}`;
+    ${p.evidence.length ? `
+      <h4 class="lightbox__label">${t("evidence.title", lang)}</h4>
+      <div class="lightbox__grid">${p.evidence.map((ev) => `
+        <figure>
+          <img src="assets/img/${ev.img}.jpg" alt="${ev.cap[lang]}">
+          <figcaption>${ev.cap[lang]}<span>${t("evidence.source", lang).replace("{page}", ev.page)}</span></figcaption>
+        </figure>`).join("")}</div>` : ""}`;
   lightbox.showModal();
+  lightbox.scrollTop = 0;
 }
 
 document.addEventListener("click", (e) => {
