@@ -1,5 +1,5 @@
-// Skills page interactions: line icons, count-up stats, workflow stepper, card spotlight.
-const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Skills page interactions: line icons, tool orbit, count-up stats, workflow stepper, card spotlight.
+const reduceMotion = REDUCE_MOTION; // from main.js
 
 // ---------- Line icons for tools without an official logo ----------
 const LINE = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -75,7 +75,85 @@ const TOOL = {
   premiere: ["Premiere Pro", "assets/icons/adobepremierepro.svg"],
   capcut: ["CapCut", null, "scissors"],
   veo: ["Veo 3", "assets/icons/google.svg"],
+  source: ["Source footage", null, "film"],
+  gemini: ["Veo", "assets/icons/googlegemini.svg"],
+  jimeng: ["Jimeng (ByteDance)", "assets/icons/bytedance.svg"],
+  analytics: ["Analytics", null, "chart"],
 };
+
+// ---------- Orbit: tools circling the portrait, one ring per skill group ----------
+const GROUPS = [
+  { key: "video", ring: 1, color: "#9999ff", tools: ["premiere", "capcut", "veo", "source"] },
+  { key: "content", ring: 2, color: "#ff5a5a", tools: ["tiktok", "youtube", "facebook", "shopee"] },
+  { key: "ai", ring: 3, color: "#c39bff", tools: ["chatgpt", "grok", "gemini", "jimeng"] },
+  { key: "data", ring: 3, color: "#34d399", tools: ["sheets", "meta", "analytics"] },
+];
+const RING_SPEED = { 1: 20, 2: 28, 3: 38 }; // seconds per turn
+const orbit = document.querySelector("[data-orbit]");
+let orbitGroup = "video";
+
+function buildOrbit() {
+  [1, 2, 3].forEach((n) => {
+    const ring = document.createElement("div");
+    ring.className = `ring ring--${n}`;
+    ring.style.setProperty("--dur", `${RING_SPEED[n]}s`);
+    const items = GROUPS.filter((g) => g.ring === n).flatMap((g) => g.tools.map((t) => ({ t, g })));
+    ring.innerHTML = items.map(({ t, g }, i) => {
+      const [name, src, icon] = TOOL[t];
+      const angle = (360 / items.length) * i + n * 20;
+      return `<button type="button" class="otile" data-group="${g.key}" style="--a:${angle}deg;--c:${g.color}" aria-label="${name}">
+        <span class="otile__halo"></span>
+        <span class="tile" data-tip="${name}">${src ? `<img src="${src}" alt="">` : LINE_ICONS[icon]}</span></button>`;
+    }).join("");
+    orbit.appendChild(ring);
+  });
+  sizeOrbit();
+}
+
+// Ring radius in px so tiles can translate outwards from the centre.
+function sizeOrbit() {
+  orbit.querySelectorAll(".ring").forEach((ring) => ring.style.setProperty("--r", `${ring.offsetWidth / 2}px`));
+}
+addEventListener("resize", sizeOrbit);
+
+function renderOrbitPanel(lang) {
+  document.querySelector("[data-orbit-tabs]").innerHTML = GROUPS.map((g) => `
+    <button type="button" role="tab" class="orbit-tab" data-group="${g.key}" aria-selected="${g.key === orbitGroup}" style="--c:${g.color}">
+      <span class="orbit-tab__dot"></span>${t(`skill.${g.key}.title`, lang)}<span class="orbit-tab__count">${g.tools.length}</span>
+    </button>`).join("");
+  const g = GROUPS.find((x) => x.key === orbitGroup);
+  const detail = document.querySelector("[data-orbit-detail]");
+  detail.innerHTML = `
+    <h2 class="orbit-detail__title">${t(`skill.${g.key}.title`, lang)}</h2>
+    <p class="orbit-detail__desc">${t(`skill.${g.key}.desc`, lang)}</p>
+    <ul class="orbit-detail__tools">${g.tools.map((k) => {
+      const [name, src, icon] = TOOL[k];
+      const label = k === "source" ? t("skill.video.p4", lang) : k === "analytics" ? t("skill.content.p3", lang) : name;
+      return `<li>${src ? `<img src="${src}" alt="">` : LINE_ICONS[icon]}<span>${label}</span></li>`;
+    }).join("")}</ul>`;
+  detail.classList.remove("is-in");
+  void detail.offsetWidth;
+  detail.classList.add("is-in");
+  orbit.dataset.active = orbitGroup;
+  orbit.querySelectorAll(".otile").forEach((el) => el.classList.toggle("is-dim", el.dataset.group !== orbitGroup));
+}
+
+function selectGroup(key) {
+  orbitGroup = key;
+  renderOrbitPanel(getLang());
+}
+document.querySelector("[data-orbit-wrap]").addEventListener("click", (e) => {
+  const el = e.target.closest("[data-group]");
+  if (!el) return;
+  selectGroup(el.dataset.group);
+  if (el.classList.contains("otile")) {
+    el.classList.remove("is-pop");
+    void el.offsetWidth; // restart the burst
+    el.classList.add("is-pop");
+    setTimeout(() => el.classList.remove("is-pop"), 700);
+  }
+});
+buildOrbit();
 const FLOW = [
   ["sheets", "meta", "tiktok"],
   ["chatgpt", "grok"],
@@ -138,9 +216,11 @@ document.querySelectorAll("[data-spot]").forEach((card) => {
 
 // ---------- Language ----------
 renderFlow(getLang());
+renderOrbitPanel(getLang());
 renderStats(getLang(), false);
 document.querySelectorAll(".stat__num").forEach((el) => { if (!statsPlayed) el.textContent = "0"; });
 document.addEventListener("langchange", (e) => {
   renderFlow(e.detail);
+  renderOrbitPanel(e.detail);
   if (statsPlayed) renderStats(e.detail, false);
 });
