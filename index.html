@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kiều Khánh Duy Anh · Video Editor & Content Creator</title>
+  <meta name="description" content="Portfolio của Kiều Khánh Duy Anh: Video Editor, Social Media & Content Creator tại Hà Nội.">
+  <meta property="og:title" content="Kiều Khánh Duy Anh · Video Editor & Content Creator">
+  <meta property="og:image" content="assets/img/portrait.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=IBM+Plex+Mono&family=Inter:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home" id="top">
+
+<!-- Figma: Home / Frame 15 -->
+<header class="hero">
+  <img class="hero__bg" src="assets/img/portrait.jpg" alt="Kiều Khánh Duy Anh">
+  <div class="topbar" data-partial="topbar"></div>
+  <a class="hero__arrow" href="projects.html" data-i18n-aria="nav.projects">
+    <svg viewBox="0 0 141 141" fill="none"><circle cx="70.5" cy="70.5" r="69.5" stroke="currentColor" stroke-width="2"/><path d="M52 89 89 52M60 52h29v29" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span><span data-i18n="hero.marquee"></span>&nbsp;·&nbsp;</span><span><span data-i18n="hero.marquee"></span>&nbsp;·&nbsp;</span>
+    </div>
+  </div>
+  <h1 class="sr-only">Kiều Khánh Duy Anh · Video Editor &amp; Content Creator</h1>
+</header>
+
+<nav class="dock" data-partial="dock"></nav>
+
+<main>
+  <!-- Figma: Frame 13 -->
+  <section class="section intro" id="about">
+    <p class="intro__lead" data-i18n="intro.lead"></p>
+    <div class="intro__side">
+      <p class="intro__note" data-i18n="intro.note"></p>
+      <a class="link-arrow" href="skills.html"><span data-i18n="intro.more"></span>
+        <svg class="icon-circle" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="17" stroke="currentColor" stroke-width="2"/><path d="M18.5 29.5 29.5 18.5m-10.2-1 10.3.9.9 10.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Figma: Frame 18 (Impressive Works + Projects Grid) -->
+  <section class="section works" id="works">
+    <div class="section-head">
+      <h2 class="display" data-i18n="works.title"></h2>
+      <p class="caps-note" data-i18n="works.note"></p>
+    </div>
+    <div class="works__grid" data-works></div>
+    <a class="btn-pill" href="projects.html"><span class="dot"></span><span data-i18n="works.explore"></span></a>
+  </section>
+
+  <!-- Figma: Frame 26 -->
+  <section class="section contact" id="contact" data-partial="contact"></section>
+</main>
+
+<!-- Figma: Frame 27 -->
+<footer class="footer" data-partial="footer"></footer>
+<dialog class="lightbox" data-partial="lightbox"></dialog>
+
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
