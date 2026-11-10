@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://htrduc.github.io/duyanh-portfolio/sitemap.xml
+Sitemap: https://2kda.github.io/duy-anh-porfolio/sitemap.xml
