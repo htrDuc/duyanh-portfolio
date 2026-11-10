@@ -7,7 +7,6 @@ const ICON = {
   home: `<svg viewBox="0 0 24 24" fill="none"><path d="M7.5 17.06h9M11.3 3.21 3.5 8.49A1.3 1.3 0 0 0 3 9.42v9.87C3 20.23 3.8 21 4.8 21h14.4c1 0 1.8-.77 1.8-1.71V9.42c0-.37-.19-.72-.5-.93L12.7 3.21a1.3 1.3 0 0 0-1.4 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   play: `<svg viewBox="0 0 24 24" fill="none"><rect x="1.5" y="3.5" width="21" height="17" rx="4" stroke="currentColor" stroke-width="1.5"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor"/></svg>`,
   cube: `<svg viewBox="0 0 24 24" fill="none"><path d="M2 9V7c0-3 2-5 5-5h10c3 0 5 2 5 5v2M2 15v2c0 3 2 5 5 5h10c3 0 5-2 5-5v-2M6.7 9.26 12 12.33l5.26-3.05M12 17.77v-5.45m-1.24-6.03-3.2 1.78c-.72.4-1.32 1.41-1.32 2.24v3.39c0 .83.59 1.84 1.32 2.24l3.2 1.78c.68.38 1.8.38 2.49 0l3.2-1.78c.72-.4 1.32-1.41 1.32-2.24v-3.39c0-.83-.59-1.84-1.32-2.24l-3.2-1.78c-.69-.39-1.81-.39-2.49 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  file: `<svg viewBox="0 0 24 24" fill="none"><path d="M15 2.4V6c0 .66.54 1.2 1.2 1.2h3.6M8.4 7.2h2.4m-2.4 3.6h7.2m-7.2 3.6h7.2M18 4.2c-.53-.48-1.09-1.04-1.44-1.41a1.3 1.3 0 0 0-.89-.39H6.6a2.4 2.4 0 0 0-2.4 2.4v14.4a2.4 2.4 0 0 0 2.4 2.4h10.8a2.4 2.4 0 0 0 2.4-2.4V6.13c0-.3-.11-.6-.33-.82-.39-.42-1-1.05-1.47-1.11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   mail: `<svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="m3.5 6.5 8.5 6 8.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   external: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.25" stroke="currentColor" stroke-width="1.5"/><path d="M8.7 14.34 15 9m-5.8.19 5.6-.47.47 5.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 };
@@ -26,8 +25,6 @@ const PARTIALS = {
     <a href="index.html" class="dock__btn" data-page-link="home" data-i18n-aria="nav.home">${ICON.home}</a>
     <a href="projects.html" class="dock__btn" data-page-link="projects" data-i18n-aria="nav.projects">${ICON.play}</a>
     <a href="skills.html" class="dock__btn" data-page-link="skills" data-i18n-aria="nav.skills">${ICON.cube}</a>
-    <a href="index.html#about" class="dock__btn dock__btn--avatar" data-i18n-aria="nav.about"><img src="assets/img/portrait.jpg" alt=""></a>
-    <a href="skills.html#education" class="dock__btn" data-i18n-aria="nav.education">${ICON.file}</a>
     <a href="#contact" class="dock__btn" data-i18n-aria="nav.contact">${ICON.mail}</a>
     <a href="mailto:${EMAIL}" class="dock__btn" data-i18n-aria="nav.email">${ICON.external}</a>`,
 
@@ -120,8 +117,10 @@ function applyLang(lang) {
   document.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t(el.dataset.i18n, lang)));
   document.querySelectorAll("[data-i18n-html]").forEach((el) => (el.innerHTML = t(el.dataset.i18nHtml, lang)));
   document.querySelectorAll("[data-i18n-aria]").forEach((el) => el.setAttribute("aria-label", t(el.dataset.i18nAria, lang)));
+  document.querySelectorAll("[data-i18n-tip]").forEach((el) => (el.dataset.tip = t(el.dataset.i18nTip, lang)));
   document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
   renderWorks(lang);
+  document.dispatchEvent(new CustomEvent("langchange", { detail: lang }));
 }
 
 function setLang(lang) {
